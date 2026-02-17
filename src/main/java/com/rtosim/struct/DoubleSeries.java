@@ -1,5 +1,5 @@
 package com.rtosim.struct;
-// Clase 1
+
 public class DoubleSeries {
     private double[] data;
     private int size;
