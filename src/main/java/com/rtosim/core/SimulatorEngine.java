@@ -6,6 +6,10 @@ import com.rtosim.model.Pcb; // El Process Control Block - la estructura de dato
 import com.rtosim.model.ProcessState; // Un enum con los estados posibles (NUEVO, LISTO, EJECUCIÓN,...)
 
 // Las clases para implementar los algoritmos de planificación
+import com.rtosim.scheduling.PolicyFactory;
+import com.rtosim.scheduling.PolicyType;
+import com.rtosim.scheduling.SchedulingPolicy;
+
 // Nuestras estructuras de datos
 import com.rtosim.struct.SimpleLinkedList;
 import com.rtosim.struct.SimpleQueue;
@@ -32,6 +36,15 @@ public class SimulatorEngine {
     
     // Para generar números aleatorios
     private final Random random;
+    
+    // Una fábrica que crea objetos de planificación
+    private final PolicyFactory policyFactory;
+    
+    // El algoritmo de planificación actual (FCFS, RR,...)
+    private volatile SchedulingPolicy policy;
+    
+    // El tipo de política seleccionada (enum)
+    private volatile PolicyType policyType;
     
     //Cuántos ciclos máximos puede ejecutarse un proceso antes de ser desalojado
     private volatile int quantum;
@@ -79,8 +92,11 @@ public class SimulatorEngine {
         this.processThreads = new SimpleLinkedList<>();
         this.queueLock = new Semaphore(1);
         this.random = new Random();
+        this.policyFactory = new PolicyFactory();
+        this.policyType = PolicyType.FCFS;
         this.quantum = 3;
         this.quantumRemaining = this.quantum;
+        this.policy = policyFactory.create(policyType, quantum);
         this.clockTick = 0;
         this.cycleMs = 300;
         this.maxInMemory = 12;
@@ -94,7 +110,5 @@ public class SimulatorEngine {
         this.successCount = 0;
         this.totalWaitTime = 0;
         this.processId = 1;
-        }
-        
     }
-    
+}
