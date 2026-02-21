@@ -13,6 +13,7 @@ public class PcbTableModel extends AbstractTableModel {
     public static final int COL_DEADLINE = 6;
     public static final int COL_REMAINING = 7;
     public static final int COL_PROCESS = 8;
+    public static final int COL_TOTAL_INSTRUCTIONS = 9;
 
     private final String[] columns;
     private final int[] mapping;
@@ -75,6 +76,7 @@ public class PcbTableModel extends AbstractTableModel {
             case COL_DEADLINE -> Math.max(0, pcb.getDeadlineRemaining());
             case COL_REMAINING -> pcb.getRemainingInstructions();
             case COL_PROCESS -> pcb.getName() + " [ID:" + pcb.getId() + "]";
+            case COL_TOTAL_INSTRUCTIONS -> pcb.getTotalInstructions();
             default -> "";
         };
     }

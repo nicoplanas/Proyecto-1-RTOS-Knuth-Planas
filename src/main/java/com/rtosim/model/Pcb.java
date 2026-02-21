@@ -161,9 +161,14 @@ public class Pcb {
     }
 
     public void updateDeadlineRemaining() {
-        if (deadlineRemaining > 0) {
-            deadlineRemaining -= 1;
+        deadlineRemaining -= 1;
+    }
+
+    public boolean metDeadline() {
+        if (finishTick < 0) {
+            return false;
         }
+        return (finishTick - arrivalTick) <= deadline;
     }
 
     public CycleEvent stepCpuCycle() {

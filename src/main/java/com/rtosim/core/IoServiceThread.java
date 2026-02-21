@@ -23,6 +23,6 @@ public class IoServiceThread extends Thread {
         } catch (InterruptedException ex) {
             Thread.currentThread().interrupt();
         }
-        
+        engine.finishIo(pcb);
     }
 }

@@ -16,5 +16,12 @@ public class InterruptHandler extends Thread {
 
     @Override
     public void run() {
+        engine.startInterrupt(message, cycles);
+        try {
+            Thread.sleep(Math.max(1, cycles * cycleMs));
+        } catch (InterruptedException ex) {
+            Thread.currentThread().interrupt();
+        }
+        engine.endInterrupt();
     }
 }

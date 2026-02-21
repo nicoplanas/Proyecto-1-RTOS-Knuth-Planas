@@ -8,13 +8,12 @@ import org.jfree.chart.plot.PiePlot;
 import org.jfree.data.general.DefaultPieDataset;
 
 public class PieChartPanel extends org.jfree.chart.ChartPanel {
-    private final DefaultPieDataset<String> dataset;
+    private final DefaultPieDataset dataset;
 
-    @SuppressWarnings("unchecked")
     public PieChartPanel() {
         super(buildChart());
-        PiePlot<String> plot = (PiePlot<String>) getChart().getPlot();
-        this.dataset = (DefaultPieDataset<String>) plot.getDataset();
+        PiePlot plot = (PiePlot) getChart().getPlot();
+        this.dataset = (DefaultPieDataset) plot.getDataset();
         setPreferredSize(new Dimension(280, 280));
         setBackground(Theme.PANEL_BG.darker());
         setMouseWheelEnabled(false);
@@ -26,9 +25,8 @@ public class PieChartPanel extends org.jfree.chart.ChartPanel {
         setMaximumDrawHeight(Integer.MAX_VALUE);
     }
 
-    @SuppressWarnings("unchecked")
     private static JFreeChart buildChart() {
-        DefaultPieDataset<String> dataset = new DefaultPieDataset<>();
+        DefaultPieDataset dataset = new DefaultPieDataset();
         dataset.setValue("Success", 0.0);
         dataset.setValue("Failure", 1.0);
 
@@ -43,7 +41,7 @@ public class PieChartPanel extends org.jfree.chart.ChartPanel {
         chart.getTitle().setPaint(Theme.TEXT_PRIMARY);
         chart.getTitle().setFont(Theme.HEADER_FONT);
 
-        PiePlot<String> plot = (PiePlot<String>) chart.getPlot();
+        PiePlot plot = (PiePlot) chart.getPlot();
         plot.setBackgroundPaint(Theme.TABLE_BG);
         plot.setOutlineVisible(false);
         plot.setSectionPaint("Success", Theme.ACCENT);
