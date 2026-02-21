@@ -66,7 +66,7 @@ public class SimulatorEngine {
     // El cambio de contexto no es instantáneo - toma tiempo (1 ciclo aquí).
     private volatile int contextSwitchRemaining;
     
-    // El proceso que está actualmente en EJECUCIÓN (usando la CPU)
+    // El proceso que está actualmente en EJECUCIÓN (usando la CPU).
     private volatile Pcb running;
     
     // El hilo del reloj. Este hilo ejecuta los tick() periódicamente.
